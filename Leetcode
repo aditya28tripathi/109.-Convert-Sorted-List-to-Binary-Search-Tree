@@ -1,0 +1,19 @@
+  TreeNode* tree(vector<int> &temp,int st, int en){
+        if(st>en) return nullptr;
+        if(st == en) return new TreeNode(temp[st]);
+        int mid = (st + en)/2;
+        TreeNode* root = new TreeNode(temp[mid]);
+        root->left = tree(temp,st,mid-1);
+        root->right = tree(temp,mid+1,en);
+        return root;
+    }
+    
+    TreeNode* sortedListToBST(ListNode* head) {
+        if(head == NULL) return NULL;
+        vector<int> temp;
+        while(head!=NULL){
+            temp.push_back(head->val);
+            head = head->next;
+        }
+        TreeNode* root = tree(temp,0,temp.size()-1);
+        return root;
